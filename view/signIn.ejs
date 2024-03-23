@@ -3,18 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SignIn</title>
+    <title>Blog - SignIn</title>
+    <link rel="stylesheet" href="css/signIn/styles.css">
 </head>
 <body>
+    <h1>Enter the Details for Signing In</h1>
     <form action="/signIn" method="post">
-        <label for="name">name</label>
+        <div class="name">
+        <label for="name">NAME</label>
         <input type="text" name="name" id="name">
-        <label for="pass">Set Password</label>
+        </div>
+        <div class="pass">
+        <label for="pass">PASSWORD</label>
         <input type="password" name="pass" id="pass">
-        <input type="submit" value="submit">
+    </div>
+    <div class="submit">
+        <input type="submit" value="SUBMIT">
+        </div>
     </form>
-    <p>
-        If not already a member, <a href="/register">register here</a>.
+    <p class="register">
+        If Not Already A Member, <a href="/register">Register Here</a>.
     </p>
 </body>
 </html>

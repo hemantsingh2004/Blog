@@ -7,7 +7,7 @@
         <li>About</li>
         <% if(user.login === true){ %>
             <li>
-                <a href="">Add-Post</a>
+                <a href="/addPost" id="add-post">Add-Post</a>
             </li>
         <% } %>
         <li id="login" class="<% if(user.login === true){ %> hide <% } %>">
@@ -23,6 +23,12 @@
             <div class="box-style">
                 <div class="user-name">
                     <h4><%= user.name.toUpperCase() %></h4>
+                </div>
+                <div class="profile">
+                    <a href="">Profile</a>
+                </div>
+                <div class="settings">
+                    <a href="">Settings</a>
                 </div>
                 <div class="log-out">
                     <a href="/logOut">log out</a>

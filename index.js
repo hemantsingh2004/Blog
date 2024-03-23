@@ -1,6 +1,7 @@
 import express from "express";
 const app = express();
 
+import pg from "pg";
 import path from "path";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
@@ -61,6 +62,10 @@ app.post("/register", (req, res) => {
     } else {
         res.render("register.ejs", { registerFlag: true});
     }
+})
+
+app.get("/addPost", (req, res) => {
+    res.render("addPost.ejs", {user});
 })
 
 app.listen(PORT, () => {
