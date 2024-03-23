@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Registeration</title>
+    <link rel="stylesheet" href="css/register/styles.css">
+</head>
+<body>
+    <h1>Register Yourself</h1>
+    <form action="/register" method="post">
+        <div class="name">
+        <label for="name">NAME</label>
+        <input type="text" name="name" id="name" required>
+        </div>
+        <div class="age">
+        <label for="age">AGE</label>
+        <input type="number" name="age" id="age" required>
+        </div>
+        <div class="speciality">
+        <label for="speciality">SPECIALITY</label>
+        <input type="text" name="speciality" id="speciality">
+        </div>
+        <div class="acc-type">
+            <label for="acc-type">ACCOUNT TYPE</label>
+            <div class="radio">
+            <input type="radio" name="acc-type" id="daily" value="daily">
+            <label for="daily">Daily</label>
+            <input type="radio" name="acc-type" id="timely" value="timely">
+            <label for="timely">Timely</label>
+            </div>
+        </div>
+        <div class="password">
+        <label for="pass">PASSWORD</label>
+        <input type="password" name="pass" id="pass" required>
+        </div>
+        <div class="verify-pass">
+        <label for="verify-pass">VERIFY PASSWORD</label>
+        <input type="password" name="verify-pass" id="verify-pass" required>
+        </div>
+        <div class="submit">
+        <input type="submit" value="SUBMIT">
+        </div>
+    </form>
+    <% if(locals.registerFlag){ %>
+    <script>
+        alert("Fill details Correctly.");
+    </script>
+    <% } %>
+</body>
+</html>

@@ -1,0 +1,34 @@
+.footer{
+    height: 20rem;
+    background-color: skyblue;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer .copyright{
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.footer p{
+    margin: 2rem;
+    font-size: 2rem;
+    color: #000;
+}
+
+.footer .links{
+    margin: 2rem 2rem;
+    margin-right: 18rem;
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(2, 1fr);
+    gap: 2.5rem;
+}
+
+.footer a{
+    font-size: 1.8rem;
+    color: black;
+}

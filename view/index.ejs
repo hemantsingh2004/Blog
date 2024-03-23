@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link rel="stylesheet" href="css/main/styles.css">
+    <link rel="stylesheet" href="css/main/header.css">
+    <link rel="stylesheet" href="css/main/footer.css">
+    <link rel="stylesheet" href="css/main/sliding.css">
+    <link rel="stylesheet" href="css/main/posts.css">
+</head>
+<body>
+    <% if(locals.user){ %>
+    <div class="header">
+        <%- include("header.ejs") %>
+    </div>
+    <div class="main">
+        <%- include("sliding.ejs") %>
+        <%- include("main-post.ejs") %>
+    </div>
+    <div class="footer">
+        <%- include("footer.ejs") %>
+    </div>
+    <script src="js/main/header.js"></script>
+    <script src="js/main/sliding.js"></script>
+    <% } %>
+</body>
+</html>

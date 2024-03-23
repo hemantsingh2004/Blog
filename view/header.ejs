@@ -1,0 +1,34 @@
+<div class="icon">ICON</div>
+<div class="navbar">
+    <ul class="nav-items">
+        <li>Home</li>
+        <li>Contact</li>
+        <li>Blogs</li>
+        <li>About</li>
+        <% if(user.login === true){ %>
+            <li>
+                <a href="">Add-Post</a>
+            </li>
+        <% } %>
+        <li id="login" class="<% if(user.login === true){ %> hide <% } %>">
+            <a href="/signIn">Sign In</a>
+        </li>
+    </ul>
+    <div class="user <% if(user.login===false){ %> hide <% } %>" id="user">
+        <p>
+            <%=user.name[0] %>
+        </p>
+        <div class="user-options hidden" id="user-options">
+            <div class="triangle-style"></div>
+            <div class="box-style">
+                <div class="user-name">
+                    <h4><%= user.name.toUpperCase() %></h4>
+                </div>
+                <div class="log-out">
+                    <a href="/logOut">log out</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
