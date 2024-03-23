@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link rel="stylesheet" href="css/main/header.css">
+    <link rel="stylesheet" href="css/main/footer.css">
+    <link rel="stylesheet" href="css/main/styles.css">
+    <link rel="stylesheet" href="css/addPost/styles.css">
+</head>
+<body>
+    <% if(locals.user){ %>
+    <div class="header">
+        <%- include("header.ejs") %>
+    </div>
+    <div class="main">
+        <% if(user.login === true){ %>
+        <%- include("postAdder.ejs") %>
+        <% }else{ %>
+            <h1>You are not allowed to make posts, Please <a href="/signIn">Sign In</a> First.</h1>
+        <% } %>
+    </div>
+    <div class="footer">
+        <%- include("footer.ejs") %>
+    </div>
+    <script src="js/main/header.js"></script>
+    <script>
+        const headerAddPost = document.getElementById("add-post");
+        headerAddPost.classList.add("hide");
+    </script>
+    <% } %>
+</body>
+</html>

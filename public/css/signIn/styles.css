@@ -27,11 +27,11 @@ form{
     gap: 1rem;
     background-color: white;
     border: 0.7rem solid black;
-    /* border-radius: 4rem; */
     width: 35%;
-    height: 60%;
+    height: 40%;
     justify-content: center;
     align-items: center;
+    margin-bottom: 5rem;
 }
 
 form *{
@@ -61,10 +61,7 @@ form input{
     background-color: yellow;
 }
 
-.radio{
-    justify-content: center;
-}
-
-.radio label:first-of-type{
-    margin-right: 2rem;
+.register, .register a{
+    font-size: 2rem;
+    text-align: center;
 }

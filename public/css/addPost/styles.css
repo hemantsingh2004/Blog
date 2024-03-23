@@ -1,0 +1,42 @@
+.main{
+    height: calc(100vh - 6rem);
+    margin-top: 6rem;
+}
+
+h1, h1 a{
+    margin-top: 8rem;
+    text-align: left;
+    font-size: 3.2rem;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 100%;
+    width: 100%;
+}
+
+form *{
+    text-align: center;
+    margin-bottom: 4rem;
+    margin-top: 2rem;
+    width: 85%;
+    padding: 1rem;
+}
+
+form #heading{
+    font-size: 3.2rem;
+}
+
+form textarea{
+    font-size: 1.8rem;
+    height: 80rem;
+}
+
+form #submit{
+    width: 50%;
+    background-color: yellow;
+    font-size: 1.8rem;
+}

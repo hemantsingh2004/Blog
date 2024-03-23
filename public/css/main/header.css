@@ -39,7 +39,7 @@ ul{
 }
 
 .user{
-    margin: 0rem 3rem;
+    margin: 0rem 5rem 0rem 0rem;
 }
 
 .user p{
@@ -53,7 +53,7 @@ ul{
 .user-options{
     position: fixed;
     top: 5.1rem;
-    right: 1.6rem;
+    right: 1.2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -65,13 +65,13 @@ ul{
     width: 0;
     border-left: 0.6rem solid transparent;
     border-right: 0.6rem solid transparent;
-    border-bottom: 1.4rem solid white;
+    border-bottom: 1.4rem solid #eee;
 }
 
 .box-style{
-    height: 8rem;
-    background-color: white;
-    width: 7rem;
+    height: 15rem;
+    background-color: #eee;
+    width: 12rem;
     border-radius: 1rem;
     display: flex;
     flex-direction: column;
@@ -79,15 +79,23 @@ ul{
     align-items: center;
 }
 
+.box-style > div:not(.user-name){
+    width: 100%;
+    border-top: 0.1rem solid black;
+    border-bottom: 0.1rem solid black;
+    text-align: center;
+}
+
 .box-style h4{
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 500;
     text-align: center;
 }
 
 .box-style a{
     text-decoration: none;
-    font-size: 1.2rem;
+    font-size: 1.6rem;
+    text-align: center;
 }
 
 .hidden{
