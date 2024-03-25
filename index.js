@@ -2,6 +2,15 @@ import express from "express";
 const app = express();
 
 import pg from "pg";
+import {db_password} from "./password.js";
+const db = new pg.Client({
+    user: "postgres",
+    host: "localhost",
+    database: "Blog",
+    password: db_password,
+    port: 5432
+});
+
 import path from "path";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
@@ -11,8 +20,11 @@ const PORT = 3000;
 import { correctInfo } from "./register.js";
 const user = {
     login:false,
-    name:""
+    name:"",
+    userId:null
 };
+
+import { postHandling } from "./postsHandling.js";
 let users = {
     "hemant":{pass:"Hemant87", age:19}
 };
@@ -53,11 +65,9 @@ app.get("/register", (req, res) => {
 app.post("/register", (req, res) => {
     const info = req.body;
     if(correctInfo(info)){
-        users[info.name] = {pass: info.pass, age: Number(info.age)};
-        user.login = true;
-        user.name = info.name;
-        console.log(users);
-        // res.render("index.ejs", {user});
+        postHandling.registerUser(db, info.name, info.age, info.speciality, info.accType, info.pass);
+        // postHandling.getUser() full
+        // console.log(user);
         res.redirect("/");
     } else {
         res.render("register.ejs", { registerFlag: true});
