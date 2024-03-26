@@ -24,5 +24,10 @@
     <p class="register">
         If Not Already A Member, <a href="/register">Register Here</a>.
     </p>
+    <% if(locals.SignInFlag === true){ %>
+    <script>
+        alert("No User Found with the following entries.\nIf you are new, register below.");
+    </script>
+    <% } %>
 </body>
 </html>
