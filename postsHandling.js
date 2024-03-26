@@ -18,8 +18,12 @@ export const postHandling = {
     },
     
     signUser : async (db, userName, password) => {
-        let user = null;
-        user = await db.query(`SELECT * FROM user_table WHERE user_name = '${userName}' AND user_password = '${password}'`);
+        const user = await db.query(`SELECT * FROM user_table WHERE user_name = '${userName}' AND user_password = '${password}'`);
         return user.rows[0];
-    }    
+    },
+    
+    addPost : async (db, userId, title, body, date) => {
+        await db.query(`INSERT INTO blog_table (title, body, modify_date, uid) VALUES ('${title}','${body}','${date}',${userId})`);
+        return;
+    }
 };

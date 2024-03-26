@@ -43,8 +43,11 @@ app.post("/signIn", async (req, res) => {   //Handling Sign In
         user.name = result.user_name;
         user.id = result.user_id;
         user.login = true;
+        res.redirect("/");
+    } else {
+        res.render("signIn.ejs", { SignInFlag : true});
     }
-    res.redirect("/");
+    
 })
 
 app.get("/register", (req, res) => {    //Rendering Registration Page
@@ -77,6 +80,10 @@ app.get("/addPost", (req, res) => { //Rendering Post Adding Page
 })
 
 app.post("/addPost", (req, res) => {    //Handling Addition of Posts
+    const info = req.body;
+    const date = new Date().toISOString().slice(0,10);
+    console.log(info);
+    const result = postHandling.addPost(db, user.id, info.heading, String(info.blogPost), date);
     res.redirect("/")
 })
 
