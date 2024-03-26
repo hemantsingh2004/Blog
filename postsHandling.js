@@ -1,23 +1,25 @@
 export const postHandling = {
+    
     registerUser : async (db, userName, age, speciality, acType, password) => {
-        db.connect();
         let accontType = null;
-        let res;
         if(acType){
-            if(acType==="Daily"){ accontType = true}
-            else {accontType = false}
             if(speciality){
-                await db.query(`INSERT INTO user_table (user_name, age, speciality, account_type, user_password) VALUES ('${userName}', ${age}, '${speciality}', ${accontType}, '${password}')`);
+                await db.query(`INSERT INTO user_table (user_name, age, speciality, account_type, user_password) VALUES ('${userName}', ${age}, '${speciality}', '${acType}', '${password}')`);
             } else {
-                await db.query(`INSERT INTO user_table (user_name, age, account_type, user_password) VALUES ('${userName}', ${age}, ${accontType}, '${password}')`);
+                await db.query(`INSERT INTO user_table (user_name, age, account_type, user_password) VALUES ('${userName}', ${age}, '${acType}', '${password}')`);
             }
         }else if(speciality){
             await db.query(`INSERT INTO user_table (user_name, age, speciality, user_password) VALUES ('${userName}', ${age}, '${speciality}', '${password}')`);
         } else {
             await db.query(`INSERT INTO user_table (user_name, age, user_password) VALUES ('${userName}', ${age}, '${password}')`);
         }
-        db.end();
+        const userID = await db.query(`SELECT * FROM user_table WHERE user_name = '${userName}' AND user_password = '${password}'`);
+        return userID.rows[0];
     },
-    signUser : (db, userName, password) => {},
     
+    signUser : async (db, userName, password) => {
+        let user = null;
+        user = await db.query(`SELECT * FROM user_table WHERE user_name = '${userName}' AND user_password = '${password}'`);
+        return user.rows[0];
+    }    
 };
