@@ -23,11 +23,15 @@
     font-size: 1.8rem;
 }
 
-.nav-items a{
+.nav-items a:not(#blog, #home){
     padding: 2rem 2.5rem;
     text-decoration: none;
     background-color: white;
     color: black;
+}
+
+#blog, #home{
+    text-decoration: none;
 }
 
 .nav-items a:hover{

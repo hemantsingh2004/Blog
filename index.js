@@ -28,12 +28,16 @@ const user = {  //Will contain the info of current user
     id:null
 };
 
+const blogs = {
+    offset: 0
+};
+
 app.get("/", (req, res) => {    //Rendering Up Home Page
-    res.render("index.ejs", {user});
+    res.render("main/index.ejs", {user});
 })
 
 app.get("/signIn", (req, res) => {  //Rendering Sign In Page
-    res.render("signIn.ejs");
+    res.render("signIn/signIn.ejs");
 })
 
 app.post("/signIn", async (req, res) => {   //Handling Sign In
@@ -45,13 +49,13 @@ app.post("/signIn", async (req, res) => {   //Handling Sign In
         user.login = true;
         res.redirect("/");
     } else {
-        res.render("signIn.ejs", { SignInFlag : true});
+        res.render("signIn/signIn.ejs", { SignInFlag : true});
     }
     
 })
 
 app.get("/register", (req, res) => {    //Rendering Registration Page
-    res.render("register.ejs");
+    res.render("register/register.ejs");
 })
 
 app.post("/register", async (req, res) => { //Handling Registration
@@ -64,7 +68,7 @@ app.post("/register", async (req, res) => { //Handling Registration
         console.log(user);
         res.redirect("/");
     } else {
-        res.render("register.ejs", { registerFlag: true});
+        res.render("register/register.ejs", { registerFlag: true});
     }
 })
 
@@ -76,21 +80,41 @@ app.get("/logOut", (req, res) => { //Handling Logout
 })
 
 app.get("/addPost", (req, res) => { //Rendering Post Adding Page
-    res.render("addPost.ejs", {user});
+    res.render("addPost/addPost.ejs", {user});
 })
 
-app.post("/addPost", (req, res) => {    //Handling Addition of Posts
+app.post("/addPost", async (req, res) => {    //Handling Addition of Posts
     const info = req.body;
     const date = new Date().toISOString().slice(0,10);
     console.log(info);
-    const result = postHandling.addPost(db, user.id, info.heading, String(info.blogPost), date);
+    const result = await postHandling.addPost(db, user.id, info.heading, String(info.blogPost), date);
     res.redirect("/")
+})
+
+app.get("/blogs", async (req, res) => {   //Showing all the blogs
+    res.render("blogs/blog.ejs", {user});
+})
+
+app.get("/api/blogs/?", async(req, res) => { //API for displaying blogs
+    const offset = req.query.offset;
+    const limit = req.query.limit;
+    const user = undefined;
+    if(req.query.userID){
+        user = req.query.userID;
+    }
+    const data = await postHandling.getblogs(db, limit, offset, user);
+    res.json(data);
+})
+
+app.get("/blogs/:blogId?", async(req, res) => {   //Showing the blogs
+    const blogId = req.params.blogId;
+    console.log(blogId);
+    const blog = await postHandling.getPost(db, blogId);
+    console.log(blog.body);
+    res.render("showBlogs/showPost.ejs", {user, blog});
 })
 
 
 app.listen(PORT, () => {        //Setting Up the port for listening
     console.log(`Server running on port ${PORT}.`);
 })
-
-//Work On Regex in register.js
-//Also maybe on Slide

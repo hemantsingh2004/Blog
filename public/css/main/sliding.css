@@ -27,7 +27,29 @@
   background-color: white;
   margin: 0rem 3rem;
   padding: 2rem 2rem;
-  animation: movement 60s infinite linear;
+  animation: movement 180s infinite linear;
+}
+
+.box a{
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+  color: black;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.box a h2{
+  font-size: 4rem;
+  font-weight: 700;
+}
+
+.box a p{
+  font-size: 2.3rem;
+  font-weight: 400;
 }
 
 .bullets{
@@ -42,7 +64,7 @@
   border-radius: 50%;
   height: 1rem;
   width: 1rem;
-  animation: colorChange 60s infinite linear;
+  animation: colorChange 180s infinite linear;
 }
 
 .bullet:nth-child(1){
@@ -50,19 +72,19 @@
 }
 
 .bullet:nth-child(2){
-  animation-delay: 12s;
-}
-
-.bullet:nth-child(3){
-  animation-delay: 24s;
-}
-
-.bullet:nth-child(4){
   animation-delay: 36s;
 }
 
+.bullet:nth-child(3){
+  animation-delay: 72s;
+}
+
+.bullet:nth-child(4){
+  animation-delay: 108s;
+}
+
 .bullet:nth-child(5){
-  animation-delay: 48s;
+  animation-delay: 144s;
 }
 
 @keyframes movement{

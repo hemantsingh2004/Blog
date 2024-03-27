@@ -1,0 +1,8 @@
+Following are the improvements which can be done in this blog web app =>
+
+1. Work On Regex in register.js
+2. Also maybe on Slide
+3. special character ' could create a problem in blog title and body
+4. could add the number of views or option for like
+5. could also add a filter section for blogs like by date or by popularity
+6. css could be improved a lot

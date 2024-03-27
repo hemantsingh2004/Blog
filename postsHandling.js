@@ -25,5 +25,21 @@ export const postHandling = {
     addPost : async (db, userId, title, body, date) => {
         await db.query(`INSERT INTO blog_table (title, body, modify_date, uid) VALUES ('${title}','${body}','${date}',${userId})`);
         return;
+    },
+
+    getblogs : async (db, limit, offset, userID) => {
+        let data = undefined;
+        if(userID){
+            data = await db.query(`SELECT * FROM blog_table ORDER BY modify_date DESC WHERE uid = ${userID} LIMIT ${limit} OFFSET ${offset};`);
+        } else {
+            data = await db.query(`SELECT * FROM blog_table ORDER BY modify_date DESC LIMIT ${limit} OFFSET ${offset};`);
+        }
+        // console.log(data);
+        return data.rows;
+    },
+
+    getPost : async (db, blogId) => {
+        const data = await db.query(`SELECT * FROM blog_table WHERE blog_id = ${blogId}`);
+        return data.rows[0];
     }
 };
