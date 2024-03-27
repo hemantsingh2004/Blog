@@ -21,6 +21,7 @@ app.use( express.urlencoded({extended: true}));     //Initialized the middleware
 app.use(express.static(path.join(__dirname, 'public')));    //Setup the ./public for static files
 app.set('views', path.join(__dirname, 'view'));     //Setup ./view for rendering files
 app.set('view engine', 'ejs');      //Setup ejs as the engine for rendering files
+app.use('/svg/yourPost', express.static(__dirname + '/public/svg/yourPost'));
 
 const user = {  //Will contain the info of current user
     login:false,
@@ -95,10 +96,14 @@ app.get("/blogs", async (req, res) => {   //Showing all the blogs
     res.render("blogs/blog.ejs", {user});
 })
 
+app.get("/yourPost", async (req, res) => {
+    res.render("yourPost/yourPost.ejs", {user});
+})
+
 app.get("/api/blogs/?", async(req, res) => { //API for displaying blogs
     const offset = req.query.offset;
     const limit = req.query.limit;
-    const user = undefined;
+    let user = undefined;
     if(req.query.userID){
         user = req.query.userID;
     }
@@ -106,11 +111,19 @@ app.get("/api/blogs/?", async(req, res) => { //API for displaying blogs
     res.json(data);
 })
 
+app.get("/api/deleteBlog/:blogId?", async(req, res) => {    //API for deleting blogs
+    const blogId = parseInt(req.params.blogId);
+    if(user.login === true){
+        if(await postHandling.userOwnBlog(db, user.id, blogId)){
+            await postHandling.deleteBlog(db, blogId);
+        }
+    }
+    res.redirect("/yourPost");
+})
+
 app.get("/blogs/:blogId?", async(req, res) => {   //Showing the blogs
     const blogId = req.params.blogId;
-    console.log(blogId);
     const blog = await postHandling.getPost(db, blogId);
-    console.log(blog.body);
     res.render("showBlogs/showPost.ejs", {user, blog});
 })
 

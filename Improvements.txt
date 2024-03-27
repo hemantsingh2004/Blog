@@ -6,3 +6,6 @@ Following are the improvements which can be done in this blog web app =>
 4. could add the number of views or option for like
 5. could also add a filter section for blogs like by date or by popularity
 6. css could be improved a lot
+7. User Profile and Settings could be added.
+8. Load More Button can be removed after all posts are retrieved.
+9. Site can be made RESPONSIVE.

@@ -30,7 +30,7 @@ export const postHandling = {
     getblogs : async (db, limit, offset, userID) => {
         let data = undefined;
         if(userID){
-            data = await db.query(`SELECT * FROM blog_table ORDER BY modify_date DESC WHERE uid = ${userID} LIMIT ${limit} OFFSET ${offset};`);
+            data = await db.query(`SELECT * FROM blog_table WHERE uid = ${userID} ORDER BY modify_date DESC LIMIT ${limit} OFFSET ${offset};`);
         } else {
             data = await db.query(`SELECT * FROM blog_table ORDER BY modify_date DESC LIMIT ${limit} OFFSET ${offset};`);
         }
@@ -41,5 +41,21 @@ export const postHandling = {
     getPost : async (db, blogId) => {
         const data = await db.query(`SELECT * FROM blog_table WHERE blog_id = ${blogId}`);
         return data.rows[0];
+    },
+
+    userOwnBlog: async (db, userId, blogId) => {
+        const data = await db.query(`SELECT * FROM blog_table WHERE uid = ${userId}`);
+        const blogIds = [];
+        for(let i of await data.rows){
+            blogIds.push(i.blog_id);
+        }
+        if(blogIds.includes(blogId)){
+            console.log("\nPresent in it.")
+            return true;
+        }
+    },
+
+    deleteBlog: async (db, blogId) => {
+        await db.query(`DELETE FROM blog_table WHERE blog_id = ${blogId}`);
     }
 };
