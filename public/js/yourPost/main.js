@@ -32,7 +32,7 @@ const fetchData = async () => {
         const delImgClone = delImg.cloneNode(true);
         delPost.appendChild(delImgClone);
         const editPost = document.createElement('a');
-        editPost.href = `/`;
+        editPost.href = `/edit/${blogId}`;
         const editImgClone = editImg.cloneNode(true);
         editPost.appendChild(editImgClone);
         const blogRight = document.createElement('div');

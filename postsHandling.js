@@ -34,7 +34,6 @@ export const postHandling = {
         } else {
             data = await db.query(`SELECT * FROM blog_table ORDER BY modify_date DESC LIMIT ${limit} OFFSET ${offset};`);
         }
-        // console.log(data);
         return data.rows;
     },
 
@@ -50,12 +49,17 @@ export const postHandling = {
             blogIds.push(i.blog_id);
         }
         if(blogIds.includes(blogId)){
-            console.log("\nPresent in it.")
             return true;
         }
     },
 
     deleteBlog: async (db, blogId) => {
         await db.query(`DELETE FROM blog_table WHERE blog_id = ${blogId}`);
+    },
+
+    editPost: async (db, blogId, text, date) => {
+        await db.query(`UPDATE blog_table SET body='${text}', modify_date='${date}' 
+                        WHERE blog_id = ${blogId}`);
+        console.log("post updated");
     }
 };

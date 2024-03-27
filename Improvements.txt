@@ -9,3 +9,4 @@ Following are the improvements which can be done in this blog web app =>
 7. User Profile and Settings could be added.
 8. Load More Button can be removed after all posts are retrieved.
 9. Site can be made RESPONSIVE.
+10. Some more alerts or other type of message(like dialog boxes) can be used.

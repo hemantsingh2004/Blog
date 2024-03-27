@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link rel="stylesheet" href="../css/main/header.css">
+    <link rel="stylesheet" href="../css/main/footer.css">
+    <link rel="stylesheet" href="../css/main/styles.css">
+    <link rel="stylesheet" href="../css/yourPost/editPost.css">
+</head>
+<body>
+    <% if(locals.user && locals.blog){ %>
+    <div class="header">
+        <%- include("../main/header.ejs") %>
+    </div>
+    <div class="main">
+        <% if(user.login === true && user.editingPermissions === true){ %>
+            <h1><%= blog.title %></h1>
+            <form action="/edit/<%= blog.blog_id %>&<%= user.id %>" method="post">
+                <textarea name="blogPost" id="blog-post" required><%= blog.body %></textarea>
+    <input type="submit" value="Update Post" id="submit">
+            </form>
+        <% }else{ %>
+            <h1>You are not allowed to make posts, Please <a href="/signIn">Sign In</a> With Concerned Account First.</h1>
+        <% } %>
+    </div>
+    <div class="footer">
+        <%- include("../main/footer.ejs") %>
+    </div>
+    <script src="../js/main/header.js"></script>
+    <% } %>
+</body>
+</html>
