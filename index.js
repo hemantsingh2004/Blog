@@ -3,18 +3,18 @@ import pg from "pg";
 import path from "path";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
-import {db_password} from "./password.js";
+import {credentials} from "./credentials.js";
 import { correctInfo } from "./register.js";
 import { postHandling } from "./postsHandling.js";
 const __dirname = dirname(fileURLToPath(import.meta.url));  //Getting the file path to Main
 const PORT = 3000;  //Initialized the port for localhost
 const app = express();  
 const db = new pg.Client({  
-    user: "postgres",
-    host: "localhost",
-    database: "Blog",
-    password: db_password,
-    port: 5432
+    user: credentials.user,
+    host: credentials.host,
+    database: credentials.database,
+    password: credentials.password,
+    port: credentials.port
 });
 db.connect();   //Connecting the database
 app.use( express.urlencoded({extended: true}));     //Initialized the middleware
@@ -26,7 +26,8 @@ app.use('/svg/yourPost', express.static(__dirname + '/public/svg/yourPost'));
 const user = {  //Will contain the info of current user
     login:false,
     name:"",
-    id:null
+    id:null,
+    editingPermissions:false
 };
 
 const blogs = {
@@ -66,7 +67,7 @@ app.post("/register", async (req, res) => { //Handling Registration
         user.id = result.user_id;
         user.name = result.user_name;
         user.login = true;
-        console.log(user);
+        // console.log(user);
         res.redirect("/");
     } else {
         res.render("register/register.ejs", { registerFlag: true});
@@ -87,9 +88,8 @@ app.get("/addPost", (req, res) => { //Rendering Post Adding Page
 app.post("/addPost", async (req, res) => {    //Handling Addition of Posts
     const info = req.body;
     const date = new Date().toISOString().slice(0,10);
-    console.log(info);
     const result = await postHandling.addPost(db, user.id, info.heading, String(info.blogPost), date);
-    res.redirect("/")
+    res.redirect("/");
 })
 
 app.get("/blogs", async (req, res) => {   //Showing all the blogs
@@ -125,6 +125,38 @@ app.get("/blogs/:blogId?", async(req, res) => {   //Showing the blogs
     const blogId = req.params.blogId;
     const blog = await postHandling.getPost(db, blogId);
     res.render("showBlogs/showPost.ejs", {user, blog});
+})
+
+app.get("/edit/:blogId?", async(req, res) => {
+    const blogId = parseInt(req.params.blogId);
+    const blog = null;
+    if(user.login === true){
+        if(await postHandling.userOwnBlog(db, user.id, blogId)){
+            user.editingPermissions = true;
+            const blog = await postHandling.getPost(db, blogId);
+            res.render("yourPost/editPost.ejs", {user, blog});       
+        }else{
+            res.render("yourPost/editPost.ejs", {user, blog})
+        }
+    }else{
+        res.render("yourPost/editPost.ejs", {user, blog});
+    }
+})
+
+app.post("/edit/:blogId&:userId?", async(req, res) => {
+    const blogId = parseInt(req.params.blogId);
+    const userId = parseInt(req.params.userId);
+    if(user.login === true){
+        if(userId === user.id){
+            if(await postHandling.userOwnBlog(db, user.id, blogId)){
+                const info = req.body;
+                const date = new Date().toISOString().slice(0,10);
+                await postHandling.editPost(db, blogId, String(info.blogPost), date);
+                console.log("process completed");
+            }
+        }
+    }
+    res.redirect("/");
 })
 
 
