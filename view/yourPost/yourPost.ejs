@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog - Your Posts</title>
+    <link rel="stylesheet" href="css/main/styles.css" />
+    <link rel="stylesheet" href="css/main/header.css" />
+    <link rel="stylesheet" href="css/main/footer.css" />
+    <link rel="stylesheet" href="css/yourPost/blogs.css" />
+  </head>
+  <body>
+    <% if(locals.user){ %>
+    <div class="header"><%- include("../main/header.ejs") %></div>
+    <div class="main">
+      <% if(user.login === true){ %>
+      <div class="user">
+        <h2>Your Name: <span><%= user.name.toUpperCase() %></span></h2>
+        <h2>Your Id: <span id="user-id"><%= user.id %></span></h2>
+      </div>
+      <div class="posts">
+        <div class="blog-posts" id="blog-posts">
+            <!-- <div class="blog">
+                <div class="blog-left">
+                    <h4>Hello World!</h4>
+                    <p>My Name is Hemant Singh.</p>
+                </div>
+                <div class="blog-right">
+                    <a href="http://"><img class="delete" src="/svg/yourPost/delete.svg" alt=""></a>
+                    <a href="http://"><img class="edit" src="/svg/yourPost/edit.svg" alt=""></a>    
+                </div>
+            </div> -->
+        </div>
+        <div class="load">
+          <button type="button" id="load-btn">Load More</button>
+        </div>
+      </div>
+      <% }else{ %>
+      <h1>
+        You are not allowed to make posts, Please
+        <a href="/signIn">Sign In</a> First.
+      </h1>
+      <% } %>
+    </div>
+    <div class="footer"><%- include("../main/footer.ejs") %></div>
+    <script src="js/main/header.js"></script>
+    <script src="js/yourPost/main.js"></script>
+    <% } %>
+  </body>
+</html>

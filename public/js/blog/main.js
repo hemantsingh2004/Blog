@@ -1,4 +1,4 @@
-loadBtn = document.getElementById("load-btn");
+const loadBtn = document.getElementById("load-btn");
 let offset = 0;
 let limit = 4;
 
@@ -18,7 +18,6 @@ const fetchData = async () => {
         blogPost.appendChild(heading);
         blogPost.appendChild(para);
         blogPost.href = `/blogs/${i.blog_id}`;
-        console.log(blogPost.href);
         document.getElementById("blog-posts").appendChild(blogPost);
     }
 }
