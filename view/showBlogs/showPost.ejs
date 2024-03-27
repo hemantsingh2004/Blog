@@ -1,0 +1,37 @@
+i<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link rel="stylesheet" href="/css/main/styles.css">
+    <link rel="stylesheet" href="/css/main/header.css">
+    <link rel="stylesheet" href="/css/main/footer.css">
+    <link rel="stylesheet" href="/css/blog/show.css">
+</head>
+<body>
+    <% if(locals.user && locals.blog){ %>
+    <div class="header">
+        <%- include("../main/header.ejs") %>
+    </div>
+    <div class="main">
+        <div class="heading">
+            <h1><%= blog.title %></h1>
+        </div>
+        <div class="body">
+            <% const para =  String(blog.body).split("\r")
+                  for(let i of para){ %>
+                  <p><%= i %></p>
+                  <% } %>
+        </div>
+        <div class="date">
+            <p><%= String(blog.modify_date).slice(4, 15) %></p>
+        </div>
+    </div>
+    <div class="footer">
+        <%- include("../main/footer.ejs") %>
+    </div>
+    <script src="/js/main/header.js"></script>
+    <% } %>
+</body>
+</html>

@@ -12,7 +12,7 @@
 <body>
     <% if(locals.user){ %>
     <div class="header">
-        <%- include("header.ejs") %>
+        <%- include("../main/header.ejs") %>
     </div>
     <div class="main">
         <% if(user.login === true){ %>
@@ -22,7 +22,7 @@
         <% } %>
     </div>
     <div class="footer">
-        <%- include("footer.ejs") %>
+        <%- include("../main/footer.ejs") %>
     </div>
     <script src="js/main/header.js"></script>
     <script>
