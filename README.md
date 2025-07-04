@@ -43,8 +43,7 @@ At that time, I didn’t know about Passport.js, JWTs, or modern auth mechanisms
 ---
 
 ## 📁 Project Structure
-
-
+```
 project-root/
 ├── public/                 # Static assets
 │   ├── css/
@@ -64,7 +63,7 @@ project-root/
 ├── credentials.js         # (Not committed) DB credentials
 ├── improvement.txt        # File where I documented flaws I found later
 └── README.md              # This file
-
+```
 ---
 
 ## 🔧 How to Run Locally
@@ -72,7 +71,7 @@ project-root/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/hemantsingh2004/Blog
+git clone https://github.com/hemantsinghdev/Blog
 cd blog-ejs-app
 ````
 
@@ -164,5 +163,5 @@ If I ever revisit this project, I’d like to:
 
 ---
 
-> Created by [Hemant Singh](https://github.com/hemantsingh2004)
+> Created by [Hemant Singh](https://github.com/hemantsinghdev)
 > Built when learning EJS, SQL, and backend architecture — and still proud of how much it taught me.
